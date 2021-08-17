@@ -1,2 +1,3 @@
-import Telas
+from Telas import telaInicial
 
+telaInicial()
