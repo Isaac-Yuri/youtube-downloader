@@ -1,5 +1,5 @@
-from typing import Text
 import PySimpleGUI as sg
+from Download import download
 
 
 sg.theme('DarkGrey')
@@ -12,7 +12,8 @@ def telaInicial():
         [sg.Text('Em qual formato deseja baixar?')],
         [sg.Checkbox('mp4', key='mp4'), sg.Checkbox('mp3', key='mp3')],
         [sg.Button('Baixar')],
-        [sg.Output(size=(30, 5),font='Arial',text_color='greenyellow')],
+        [sg.FileSaveAs('Salvar como')],
+        # [sg.Output(size=(30, 5),font='Arial',text_color='greenyellow',echo_stdout_stderr=True)],
     ]
 
     janela = sg.Window('Youtube Downloader', layout=layout)
@@ -25,4 +26,10 @@ def telaInicial():
         if eventos == 'Baixar':
             mp4, mp3 = valores['mp4'], valores['mp3']
             url = valores['url']
-            print(mp3, mp4)
+
+            if mp4:
+                video = download(url=url, mp4=True)
+            elif mp3:
+                audio = download(url=url, mp4=False, mp3=True)
+            elif mp4 and mp3:
+                video_audio = download(url=url, mp4=True, mp3=True)
