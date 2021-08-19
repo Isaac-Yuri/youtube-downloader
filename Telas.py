@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from time import sleep
+from tqdm import tqdm
 from Download import download
 
 
@@ -12,8 +14,7 @@ def telaInicial():
         [sg.Text('Em qual formato deseja baixar?')],
         [sg.Checkbox('mp4', key='mp4'), sg.Checkbox('mp3', key='mp3')],
         [sg.Button('Baixar')],
-        [sg.FileSaveAs('Salvar como')],
-        # [sg.Output(size=(30, 5),font='Arial',text_color='greenyellow',echo_stdout_stderr=True)],
+        [sg.Output(size=(30, 5),font='Arial',text_color='greenyellow',echo_stdout_stderr=True)],
     ]
 
     janela = sg.Window('Youtube Downloader', layout=layout)
@@ -24,6 +25,8 @@ def telaInicial():
         if eventos == sg.WIN_CLOSED:
             break
         if eventos == 'Baixar':
+            for _ in tqdm(range(100), desc="Baixando...",ascii=False, ncols=75):
+                sleep(0.15)
             mp4, mp3 = valores['mp4'], valores['mp3']
             url = valores['url']
 
@@ -33,3 +36,4 @@ def telaInicial():
                 audio = download(url=url, mp4=False, mp3=True)
             elif mp4 and mp3:
                 video_audio = download(url=url, mp4=True, mp3=True)
+            print('Download concluído!')
