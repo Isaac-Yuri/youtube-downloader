@@ -28,4 +28,9 @@ def telaDeAviso():
 
 
 def telaDownloadConcluido():
-    pass
+    layout = [
+        [sg.Text('Download concluído com sucesso!')],
+        [sg.Button('OK')]
+    ]
+    
+    return sg.Window('Download Concluído', layout=layout)

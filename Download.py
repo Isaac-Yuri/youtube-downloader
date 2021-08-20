@@ -3,7 +3,7 @@ from tqdm import tqdm
 from time import sleep
 
 
-def download(url, mp4=True, mp3=False):
+def download_yt(url, mp4=True, mp3=False):
     yt = YouTube(url,)
 
     if mp4:
