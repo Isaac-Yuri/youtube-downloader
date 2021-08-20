@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import threading
+from threading import Thread
 from time import sleep
 from tqdm import tqdm
 from Download import download
@@ -35,11 +35,10 @@ def telaInicial():
                         sleep(0.05)
                     print('Download concluído!')
 
-                threading.Thread(target=progresso_download).start()
+                Thread(target=progresso_download).start()
                 
                 mp4, mp3 = valores['mp4'], valores['mp3']
                 
-
                 if mp4:
                     video = download(url=url, mp4=True)
                 elif mp3:
